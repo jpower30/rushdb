@@ -1,14 +1,43 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Log In
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <form [formGroup]="credentialsForm">
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['email']"
+          type="email"></ion-input>
+    </ion-item>
+
+    <div *ngIf="!credentialsForm.controls.email.valid &&
+      credentialsForm.controls.email.dirty"
+      class="validator-error">
+      Please enter a valid email.
+    </div>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['password']"
+          type="password"></ion-input>
+    </ion-item>
+
+    <div *ngIf="!credentialsForm.controls.password.valid &&
+        credentialsForm.controls.password.dirty"
+        class="validator-error">
+      Please enter a valid password.
+    </div>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block [disabled]="!credentialsForm.valid" (click)="onSignIn()">
+          Sign in
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
