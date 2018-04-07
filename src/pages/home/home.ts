@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { regexValidators } from '../validators/validator';
+import { RusheeFormPage } from '../rushee-form/rushee-form';
 
 @Component({
   selector: 'page-home',
@@ -27,5 +28,6 @@ export class HomePage {
       console.log('Password: ' +
         this.credentialsForm.controls['password'].value);
     }
+    this.navCtrl.push(RusheeFormPage);
   }
 }
