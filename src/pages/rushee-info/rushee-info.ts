@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController, NavParams } from 'ionic-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
 import { DashboardPage } from '../dashboard/dashboard';
 
@@ -21,13 +21,14 @@ export class RusheeInfoPage {
   name: string;
   email: string;
   phone: string;
-  homeTown: string;
+  hometown: string;
   major: string;
   year: number;
   champion: string;
   status: string;
   description: string;
   notes: string;
+  private brothers = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider,
               private formBuilder: FormBuilder) {
@@ -35,7 +36,7 @@ export class RusheeInfoPage {
     this.name = navParams.get('name');
     this.email = navParams.get('email');
     this.phone = navParams.get('phone');
-    this.homeTown = navParams.get('homeTown');
+    this.hometown = navParams.get('hometown');
     this.major = navParams.get('major');
     this.year = navParams.get('year');
     this.champion = navParams.get('champion');
@@ -47,7 +48,7 @@ export class RusheeInfoPage {
       name: [this.name],
       email: [this.email],
       phone: [this.phone],
-      homeTown: [this.homeTown],
+      hometown: [this.hometown],
       major: [this.major],
       year: [this.year],
       champion: [this.champion],
@@ -63,7 +64,7 @@ export class RusheeInfoPage {
                 name: this.rusheeInfo.controls['name'].value,
                 email: this.rusheeInfo.controls['email'].value,
                 phone: this.rusheeInfo.controls['phone'].value,
-                homeTown: this.rusheeInfo.controls['homeTown'].value,
+                hometown: this.rusheeInfo.controls['hometown'].value,
                 major: this.rusheeInfo.controls['major'].value,
                 year: this.rusheeInfo.controls['year'].value,
                 champion: this.rusheeInfo.controls['champion'].value,
@@ -73,11 +74,32 @@ export class RusheeInfoPage {
                 userKey: this.navParams.get('userKey'),
                 userToken: this.navParams.get('userToken')
             }
-            var promise = this.restProvider.editRushee(body);
+            var promise = this.restProvider.editRushee(body).catch(function(err) {
+              console.log(err);
+            });
             promise.then(data => {
                 console.log(data);
             });
             this.navCtrl.push(DashboardPage, this.navParams);
         }
+  }
+
+  getBrothers() {
+    var body = {
+      userToken: this.navParams.get('userToken')
+    }
+    var page = this;
+    var promise = this.restProvider.getBrothers(body).catch(function(err) {
+      console.log(err);
+    });
+    promise.then(function(bros) {
+         let i = 0;
+         while (bros[i] != null) {
+           page.brothers.push(bros[i]);
+           i++;
+         }
+         console.log(page.brothers);
+    });
+
   }
 }

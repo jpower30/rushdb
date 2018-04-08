@@ -35,7 +35,7 @@ export class RusheeFormPage {
       name: ['', Validators.required],
       email: ['', regexValidators.email],
       phone: ['', regexValidators.phone],
-      homeTown: [''],
+      hometown: [''],
       major: [''],
       year: ['', regexValidators.year]
     });
@@ -47,12 +47,19 @@ export class RusheeFormPage {
                 name: this.infoForm.controls['name'].value,
                 email: this.infoForm.controls['email'].value,
                 phone: this.infoForm.controls['phone'].value,
-                homeTown: this.infoForm.controls['homeTown'].value,
+                hometown: this.infoForm.controls['hometown'].value,
                 major: this.infoForm.controls['major'].value,
                 year: this.infoForm.controls['year'].value,
+                picture: this.image,
+                status: "Rushing",
+                notes: "",
+                description: "",
+                champion: "",
                 userToken: this.navParams.get('userToken')
             }
-            var promise = this.restProvider.submitRushee(body);
+            var promise = this.restProvider.submitRushee(body).catch(function(err) {
+              console.log(err);
+            });
             promise.then(data => {
                 console.log(data);
             });
@@ -70,7 +77,10 @@ export class RusheeFormPage {
           cameraDirection: this.camera.Direction.FRONT
         }
 
-        this.camera.getPicture(options).then((imageData) => {
+        var promise = this.camera.getPicture(options).catch(function(err) {
+          console.log(err);
+        });
+        promise.then((imageData) => {
           this.image = 'data:image/jpeg;base64,' + imageData;
           console.log(this.image);
         }, (err) => {

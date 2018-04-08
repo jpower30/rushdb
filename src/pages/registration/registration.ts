@@ -34,7 +34,7 @@ export class RegistrationPage {
       orginization: [''],
       orgPassword: [''],
       email: ['', Validators.compose([Validators.pattern(regexValidators.email), Validators.required])],
-      password: ['']//, Validators.compose([Validators.pattern(regexValidators.password), Validators.required])]
+      password: ['']
     });
   }
 
@@ -66,7 +66,10 @@ export class RegistrationPage {
 
     getOrgs() {
         var page = this;
-        this.restProvider.getOrgs().then(function(orgs) {
+        var promise = this.restProvider.getOrgs().catch(function(err) {
+              console.log(err);
+        });
+        promise.then(function(orgs) {
            let i = 0;
            while (orgs[i] != null) {
              page.orginizations.push(orgs[i]);

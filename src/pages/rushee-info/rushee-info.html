@@ -32,7 +32,7 @@
 
     <ion-item>
       <ion-label floating>Home Town</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['homeTown']" type="text"></ion-input>
+      <ion-input [formControl]="rusheeInfo.controls['hometown']" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -48,7 +48,9 @@
 
     <ion-item>
       <ion-label floating>Champion</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['champion']" type="text"></ion-input>
+      <ion-select formControl]="rusheeInfo.controls['champion']">
+        <ion-option *ngFor="let brother of brothers" value={{brother.userId}}>{{brother.name}}</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>

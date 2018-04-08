@@ -79,4 +79,15 @@ export class RestProvider {
     });
   }
 
+  getBrothers(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/get-brothers', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }
