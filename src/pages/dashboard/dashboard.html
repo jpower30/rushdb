@@ -4,46 +4,48 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-   <!-- <ion-title>Dashboard</ion-title> -->
+  <ion-header>
 
-      <ion-segment class="segment">
-          <button ion-button color="receivedBid" (click)="addRushee()">Add Profile</button>
-          <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="filterData($event)"></ion-searchbar>
-      </ion-segment>
+    <ion-navbar>
+     <!-- <ion-title>Dashboard</ion-title> -->
 
-  </ion-navbar>
-  <ion-grid class="grid">
-    <ion-row>
-        <ion-col col-auto *ngFor="let person of activePeople">
-        <button ion-button large color="{{setColor(person)}}" (click)="getInfo(person)"  class="cards">
-      <ul>
-          {{person.name}}
-        <li class="smallData">
-          Hometown: {{person.hometown}}
-        </li>
-        <li class="smallData">
-            Major: {{person.major}}
-        </li>
-        <li class="smallData">
-            Year: {{person.year}}
-        </li>
-        <li class="smallData">
-            Status: {{person.status}}
-        </li>
-      </ul>
-    </button>
-  </ion-col>
-  </ion-row>
-  </ion-grid>
+        <ion-segment class="segment">
+            <button ion-button color="pledged" (click)="addRushee()">Add Profile</button>
+            <button ion-button color="receivedBid" (click)="logOut()">Log Out</button>
+            <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="filterData($event)"></ion-searchbar>
+        </ion-segment>
+
+    </ion-navbar>
+
+    <ion-grid class="grid">
+      <ion-row>
+          <ion-col col-auto *ngFor="let person of activePeople">
+          <button ion-button large color="{{setColor(person)}}" (click)="getInfo(person)"  class="cards">
+        <ul>
+            {{person.name}}
+          <li class="smallData">
+            Hometown: {{person.hometown}}
+          </li>
+          <li class="smallData">
+              Major: {{person.major}}
+          </li>
+          <li class="smallData">
+              Year: {{person.year}}
+          </li>
+          <li class="smallData">
+              Status: {{person.status}}
+          </li>
+        </ul>
+      </button>
+    </ion-col>
+    </ion-row>
+    </ion-grid>
 
 
+  </ion-header>
 
-</ion-header>
 
+  <ion-content padding>
+  </ion-content>
 
-<ion-content padding>
-
-</ion-content>

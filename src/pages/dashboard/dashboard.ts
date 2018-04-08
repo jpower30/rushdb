@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { RusheeFormPage } from '../rushee-form/rushee-form';
 import { RestProvider } from '../../providers/rest/rest';
 import { RusheeInfoPage } from '../rushee-info/rushee-info';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the DashboardPage page.
@@ -107,6 +108,10 @@ export class DashboardPage {
         }
       }
     }
+  }
+
+  public logOut() {
+    this.navCtrl.push(HomePage);
   }
 
 }
