@@ -1,0 +1,57 @@
+<!--
+  Generated template for the RusheeFormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar hideBackButton="true">
+    <ion-title>Your Info</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="infoForm">
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input [formControl]="infoForm.controls['name']" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [formControl]="infoForm.controls['email']" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Phone</ion-label>
+      <ion-input [formControl]="infoForm.controls['phone']" type="tel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Home Town</ion-label>
+      <ion-input [formControl]="infoForm.controls['homeTown']" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Major</ion-label>
+      <ion-input [formControl]="infoForm.controls['major']" type="text"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Year (1, 2, 3...)</ion-label>
+      <ion-input [formControl]="infoForm.controls['year']" type="number"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block [disabled]="!infoForm.valid" (click)="onSubmit()">
+          Submit
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
