@@ -39,5 +39,9 @@
         </button>
       </ion-col>
     </ion-row>
+
+    <div *ngIf="failedLogIn" class="validator-error">
+      Log in failed.
+    </div>
   </form>
 </ion-content>
