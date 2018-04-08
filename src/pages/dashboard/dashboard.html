@@ -11,7 +11,7 @@
 
       <ion-segment class="segment">
           <button ion-button color="receivedBid" (click)="addRushee()">Add Profile</button>
-          <ion-searchbar (ionInput)="filterData($event)"></ion-searchbar>
+          <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="filterData($event)"></ion-searchbar>
       </ion-segment>
 
   </ion-navbar>

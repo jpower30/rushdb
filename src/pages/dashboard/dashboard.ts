@@ -20,7 +20,7 @@ export class DashboardPage {
 
   private activePeople = [];
 
-  private searchString = "";
+  searchQuery : string;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public nav: NavController, public restProvider: RestProvider) {
@@ -97,24 +97,16 @@ export class DashboardPage {
   }
 
   public filterData(str) : any {
-    this.searchString += str.data;
-    if (str.data == null) {
-      this.searchString = this.searchString.substring(0, this.searchString.length - 1)
-    }
-    if (this.searchString.length == 0) {
+    if (this.searchQuery.length == 0) {
       this.activePeople = this.people;
     } else {
       this.activePeople = [];
       for (var i = 0; i < this.people.length; i++) {
-        if (this.people[i].name.toLowerCase().indexOf(this.searchString) >= 0) {
+        if (this.people[i].name.toLowerCase().indexOf(this.searchQuery.toLowerCase()) >= 0) {
           this.activePeople.push(this.people[i]);
         }
       }
     }
-
-
-
-   // this.people = this.activePeople;
   }
 
 }
