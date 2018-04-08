@@ -50,8 +50,8 @@
       </ion-col>
     </ion-row>
 
-    <div *ngIf="failedLogIn" class="validator-error">
-      Registration failed.
+    <div *ngIf="failedRegistration" class="validator-error">
+      Registration failed. {{failedReason}}.
     </div>
   </form>
 </ion-content>

@@ -20,6 +20,7 @@ export class RegistrationPage {
 
   credentialsForm: FormGroup;
   failedRegistration : boolean;
+  failedReason : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
               public restProvider: RestProvider) {
@@ -52,8 +53,9 @@ export class RegistrationPage {
                 if (user && user['userToken']) {
                     console.log(user['userToken']);
                     page.navCtrl.push(DashboardPage, {userToken: user['userToken']});
-                } else {
+                } else if (user) {
                   page.failedRegistration = true;
+                  page.failedReason = user["reason"];
                 }
             });
         }
