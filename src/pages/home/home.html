@@ -26,16 +26,18 @@
           type="password"></ion-input>
     </ion-item>
 
-    <div *ngIf="!credentialsForm.controls.password.valid &&
-        credentialsForm.controls.password.dirty"
-        class="validator-error">
-      Please enter a valid password.
-    </div>
-
     <ion-row>
       <ion-col text-center>
         <button ion-button block [disabled]="!credentialsForm.valid" (click)="onSignIn()">
           Sign in
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block (click)="onRegister()">
+          Go to Register
         </button>
       </ion-col>
     </ion-row>

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Register
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="credentialsForm">
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['name']" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Orginization</ion-label>
+      <ion-select [formControl]="credentialsForm.controls['orginization']">
+        <ion-option *ngFor="let orginization of orginizations" value={{orginization.orgKey}}>{{orginization.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Org Password</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['orgPassword']"
+          type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['email']"
+          type="email"></ion-input>
+    </ion-item>
+
+    <div *ngIf="!credentialsForm.controls.email.valid &&
+      credentialsForm.controls.email.dirty"
+      class="validator-error">
+      Please enter a valid email.
+    </div>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['password']"
+          type="password"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block [disabled]="!credentialsForm.valid" (click)="onRegister()">
+          Register
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="failedRegistration" class="validator-error">
+      Registration failed. {{failedReason}}.
+    </div>
+  </form>
+</ion-content>

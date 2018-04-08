@@ -57,4 +57,37 @@ export class RestProvider {
     });
   }
 
+  register(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/create-new-user', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getOrgs() {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/get-org-list', JSON.stringify({}), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getBrothers(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/get-brothers', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }
