@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { regexValidators } from '../validators/validator';
 import { RusheeFormPage } from '../rushee-form/rushee-form';
 import { RusheeInfoPage } from '../rushee-info/rushee-info';
-import firebase from 'firebase';
+import { RestProvider } from '../../providers/rest/rest';
 
 @Component({
   selector: 'page-home',
@@ -16,7 +16,8 @@ export class HomePage {
   failedLogIn : boolean;
 
   constructor(public navCtrl: NavController,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              public restProvider: RestProvider) {
 
     this.failedLogIn = false;
 
@@ -35,13 +36,18 @@ export class HomePage {
             console.log('Password: ' + password);
 
             var page = this;
-            var promise = firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-                page.failedLogIn = true;
+            var body = {
+              email: email,
+              password: password
+            }
+            var promise = this.restProvider.logIn(body).catch(function(err) {
+              console.log(err);
             });
             promise.then(function(user) {
-                if (user) {
-                    console.log(user['qa']);
-                    page.navCtrl.push(RusheeInfoPage, {userToken: user['qa']});
+                console.log(user);
+                if (user['userToken']) {
+                    console.log(user['userToken']);
+                    page.navCtrl.push(RusheeInfoPage, {userToken: user['userToken']});
                 }
             });
         }

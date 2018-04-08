@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
+import { ThanksPage } from '../thanks/thanks';
 
 /**
  * Generated class for the RusheeInfoPage page.

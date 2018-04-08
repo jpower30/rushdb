@@ -46,4 +46,15 @@ export class RestProvider {
     });
   }
 
+  logIn(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/login', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }
