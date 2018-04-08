@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { regexValidators } from '../validators/validator';
 import { RusheeFormPage } from '../rushee-form/rushee-form';
+import { RusheeInfoPage } from '../rushee-info/rushee-info';
 import firebase from 'firebase';
 
 @Component({
@@ -40,7 +41,7 @@ export class HomePage {
             promise.then(function(user) {
                 if (user) {
                     console.log(user['qa']);
-                    page.navCtrl.push(RusheeFormPage, {userToken: user['qa']});
+                    page.navCtrl.push(RusheeInfoPage, {userToken: user['qa']});
                 }
             });
         }

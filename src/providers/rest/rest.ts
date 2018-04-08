@@ -24,4 +24,26 @@ export class RestProvider {
     });
   }
 
+  getRushees(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/get-rushees', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  editRushee(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/edit-rushee', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
 }

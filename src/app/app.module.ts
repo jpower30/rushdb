@@ -10,13 +10,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RusheeFormPage } from '../pages/rushee-form/rushee-form'
 import { ThanksPage } from '../pages/thanks/thanks'
+import { RusheeInfoPage } from '../pages/rushee-info/rushee-info'
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     RusheeFormPage,
-    ThanksPage
+    ThanksPage,
+    RusheeInfoPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { ThanksPage } from '../pages/thanks/thanks'
     MyApp,
     HomePage,
     RusheeFormPage,
-    ThanksPage
+    ThanksPage,
+    RusheeInfoPage
   ],
   providers: [
     StatusBar,
