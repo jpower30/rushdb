@@ -48,7 +48,7 @@
 
     <ion-item>
       <ion-label floating>Champion</ion-label>
-      <ion-select formControl]="rusheeInfo.controls['champion']">
+      <ion-select [formControl]="rusheeInfo.controls['champion']">
         <ion-option *ngFor="let brother of brothers" value={{brother.userId}}>{{brother.name}}</ion-option>
       </ion-select>
     </ion-item>
