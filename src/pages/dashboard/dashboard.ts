@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RusheeFormPage } from '../rushee-form/rushee-form';
+import { RestProvider } from '../../providers/rest/rest';
 
 /**
  * Generated class for the DashboardPage page.
@@ -19,7 +20,7 @@ export class DashboardPage {
   private people = [];
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public nav: NavController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public nav: NavController, public restProvider: RestProvider) {
     this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
     this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
     this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
@@ -57,6 +58,18 @@ export class DashboardPage {
 
   public addRushee() : void {
       this.navCtrl.push(RusheeFormPage, this.navParams);
+  }
+
+  public getData() {
+      var body = {
+        userToken: this.navParams.get("userToken")
+      }
+      var promise = this.restProvider.getRushees(body).catch(function(err) {
+              console.log(err);
+            });
+            promise.then(function(rushees) {
+
+            });
   }
 
 
