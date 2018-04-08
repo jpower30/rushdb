@@ -48,6 +48,14 @@
 
     <ion-row>
       <ion-col text-center>
+        <button ion-button block (click)="takePicture()">
+          Take Picture
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col text-center>
         <button ion-button block [disabled]="!infoForm.valid" (click)="onSubmit()">
           Submit
         </button>

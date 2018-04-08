@@ -3,8 +3,8 @@ import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { regexValidators } from '../validators/validator';
 import { DashboardPage } from '../dashboard/dashboard';
-import { RusheeInfoPage } from '../rushee-info/rushee-info';
 import { RestProvider } from '../../providers/rest/rest';
+import { RegistrationPage } from '../registration/registration'
 
 @Component({
   selector: 'page-home',
@@ -53,5 +53,9 @@ export class HomePage {
                 }
             });
         }
+    }
+
+    onRegister() {
+      this.navCtrl.push(RegistrationPage);
     }
 }

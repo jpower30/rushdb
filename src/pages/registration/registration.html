@@ -1,13 +1,29 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Log In
+      Register
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <form [formGroup]="credentialsForm">
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['name']" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Org</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['orginization']" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Org Password</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['orgPassword']"
+          type="password"></ion-input>
+    </ion-item>
+
     <ion-item>
       <ion-label floating>Email</ion-label>
       <ion-input [formControl]="credentialsForm.controls['email']"
@@ -28,22 +44,14 @@
 
     <ion-row>
       <ion-col text-center>
-        <button ion-button block [disabled]="!credentialsForm.valid" (click)="onSignIn()">
-          Sign in
-        </button>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col text-center>
-        <button ion-button block (click)="onRegister()">
-          Go to Register
+        <button ion-button block [disabled]="!credentialsForm.valid" (click)="onRegister()">
+          Register
         </button>
       </ion-col>
     </ion-row>
 
     <div *ngIf="failedLogIn" class="validator-error">
-      Log in failed.
+      Registration failed.
     </div>
   </form>
 </ion-content>

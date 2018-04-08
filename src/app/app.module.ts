@@ -13,6 +13,7 @@ import { RusheeFormPage } from '../pages/rushee-form/rushee-form'
 import { ThanksPage } from '../pages/thanks/thanks'
 import { RusheeInfoPage } from '../pages/rushee-info/rushee-info'
 import { DashboardPage} from '../pages/dashboard/dashboard'
+import { RegistrationPage } from '../pages/registration/registration'
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DashboardPage} from '../pages/dashboard/dashboard'
     RusheeFormPage,
     ThanksPage,
     RusheeInfoPage,
-    DashboardPage
+    DashboardPage,
+    RegistrationPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { DashboardPage} from '../pages/dashboard/dashboard'
     RusheeFormPage,
     ThanksPage,
     RusheeInfoPage,
-    DashboardPage
+    DashboardPage,
+    RegistrationPage
   ],
   providers: [
     StatusBar,
