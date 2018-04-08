@@ -33,6 +33,8 @@ export class RusheeInfoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider,
               private formBuilder: FormBuilder) {
 
+    this.getBrothers();
+
     this.name = navParams.get('name');
     this.email = navParams.get('email');
     this.phone = navParams.get('phone');
