@@ -8,13 +8,15 @@ import { RestProvider } from '../providers/rest/rest';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { RusheeFormPage} from '../pages/rushee-form/rushee-form'
+import { RusheeFormPage } from '../pages/rushee-form/rushee-form'
+import { ThanksPage } from '../pages/thanks/thanks'
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    RusheeFormPage
+    RusheeFormPage,
+    ThanksPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { RusheeFormPage} from '../pages/rushee-form/rushee-form'
   entryComponents: [
     MyApp,
     HomePage,
-    RusheeFormPage
+    RusheeFormPage,
+    ThanksPage
   ],
   providers: [
     StatusBar,

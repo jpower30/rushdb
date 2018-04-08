@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { regexValidators } from '../validators/validator';
 import { RestProvider } from '../../providers/rest/rest';
+import { ThanksPage } from '../thanks/thanks';
 
 /**
  * Generated class for the RusheeFormPage page.
@@ -51,6 +52,7 @@ export class RusheeFormPage {
             promise.then(data => {
                 console.log(data);
             });
+            this.navCtrl.push(ThanksPage, this.navParams);
         }
   }
 }
