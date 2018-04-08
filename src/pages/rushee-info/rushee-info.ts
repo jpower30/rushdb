@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
-import { ThanksPage } from '../thanks/thanks';
+import { DashboardPage } from '../dashboard/dashboard';
 
 /**
  * Generated class for the RusheeInfoPage page.
@@ -77,7 +77,7 @@ export class RusheeInfoPage {
             promise.then(data => {
                 console.log(data);
             });
-            this.navCtrl.push(ThanksPage, this.navParams);
+            this.navCtrl.push(DashboardPage, this.navParams);
         }
   }
 }

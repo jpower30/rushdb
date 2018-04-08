@@ -20,7 +20,8 @@ import { DashboardPage} from '../pages/dashboard/dashboard'
     HomePage,
     RusheeFormPage,
     ThanksPage,
-    RusheeInfoPage
+    RusheeInfoPage,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,8 @@ import { DashboardPage} from '../pages/dashboard/dashboard'
     DashboardPage,
     RusheeFormPage,
     ThanksPage,
-    RusheeInfoPage
+    RusheeInfoPage,
+    DashboardPage
   ],
   providers: [
     StatusBar,

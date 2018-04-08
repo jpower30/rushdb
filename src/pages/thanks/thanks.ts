@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { RusheeFormPage } from '../rushee-form/rushee-form';
+import { DashboardPage } from '../dashboard/dashboard';
 
 /**
  * Generated class for the ThanksPage page.
@@ -19,6 +19,6 @@ export class ThanksPage {
   }
 
   onClick() {
-    this.navCtrl.push(RusheeFormPage, this.navParams);
+    this.navCtrl.push(DashboardPage, this.navParams);
   }
 }

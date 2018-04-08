@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RusheeFormPage } from '../rushee-form/rushee-form';
 
 /**
  * Generated class for the DashboardPage page.
@@ -52,10 +53,10 @@ export class DashboardPage {
       } else if (person.status == "Dumpster") {
         return "dumpster";
       }
-  }  
+  }
 
   public addRushee() : void {
-    
+      this.navCtrl.push(RusheeFormPage, this.navParams);
   }
 
 

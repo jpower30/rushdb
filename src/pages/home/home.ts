@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { regexValidators } from '../validators/validator';
-import { RusheeFormPage } from '../rushee-form/rushee-form';
+import { DashboardPage } from '../dashboard/dashboard';
 import { RusheeInfoPage } from '../rushee-info/rushee-info';
 import { RestProvider } from '../../providers/rest/rest';
 
@@ -47,7 +47,9 @@ export class HomePage {
                 console.log(user);
                 if (user['userToken']) {
                     console.log(user['userToken']);
-                    page.navCtrl.push(RusheeInfoPage, {userToken: user['userToken']});
+                    page.navCtrl.push(DashboardPage, {userToken: user['userToken']});
+                } else {
+                  page.failedLogIn = true;
                 }
             });
         }
