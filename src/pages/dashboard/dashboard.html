@@ -9,18 +9,16 @@
   <ion-navbar>
    <!-- <ion-title>Dashboard</ion-title> -->
 
-      <ion-segment>
+      <ion-segment class="segment">
           <button ion-button color="receivedBid" (click)="addRushee()">Add Profile</button>
-        <ion-segment-button value="filter1">Filter 1</ion-segment-button>
-        <ion-segment-button value="filter2">Filter 2</ion-segment-button>
-        <ion-segment-button value="filter3">Filter 3</ion-segment-button>
+          <ion-searchbar (ionInput)="filterData($event)"></ion-searchbar>
       </ion-segment>
 
   </ion-navbar>
   <ion-grid class="grid">
     <ion-row>
-        <ion-col col-3 *ngFor="let person of people">
-        <button ion-button large color="{{setColor(person)}}" (click)="getInfo()"  class="cards">
+        <ion-col col-auto *ngFor="let person of activePeople">
+        <button ion-button large color="{{setColor(person)}}" (click)="getInfo(person)"  class="cards">
       <ul>
           {{person.name}}
         <li class="smallData">

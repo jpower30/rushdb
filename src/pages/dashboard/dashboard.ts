@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RusheeFormPage } from '../rushee-form/rushee-form';
 import { RestProvider } from '../../providers/rest/rest';
+import { RusheeInfoPage } from '../rushee-info/rushee-info';
 
 /**
  * Generated class for the DashboardPage page.
@@ -19,17 +20,22 @@ export class DashboardPage {
 
   private people = [];
 
+  private activePeople = [];
+
+  private searchString = "";
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public nav: NavController, public restProvider: RestProvider) {
-    this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
-    this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
-    this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
-    this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
-    this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
-    this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Pledged", champion: "Papa P" });
-    this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Dumpster", champion: "Papa P" });
+    // this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
+    // this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
+    // this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
+    // this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
+    // this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
+    // this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Pledged", champion: "Papa P" });
+    // this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Dumpster", champion: "Papa P" });
     //this.people.push( {name: "Ranger", hometown: "Roswell, GA", major: "CS", year: 2, status: "Rushing", champion: "Papa P" });
-    this.setColor(this.people);
+    this.getData();
+   
   }
 
 
@@ -37,9 +43,20 @@ export class DashboardPage {
     console.log('ionViewDidLoad DashboardPage');
   }
 
-  public getInfo() : void {
-    //call to rusheeForm
-    console.log("wow");
+  public getInfo(person) : void {
+    var body = {
+      name: person.name['name'],
+      email: person.email['email'],
+      phone: person.phone['phone'],
+      hometown: person.hometown['hometown'],
+      major: person.major['major'],
+      year: person.year['year'],
+      champion: person.champion['champion'],
+      status: person.status['status'],
+      description: person.description['description'],
+      notes: person.notes['notes']
+    };
+    this.navCtrl.push(RusheeInfoPage, body);
   }
 
   public setColor(person) : string  {
@@ -60,17 +77,48 @@ export class DashboardPage {
       this.navCtrl.push(RusheeFormPage, this.navParams);
   }
 
+
   public getData() {
       var body = {
         userToken: this.navParams.get("userToken")
-      }
+      }     
+      var page = this;  //used to access this
       var promise = this.restProvider.getRushees(body).catch(function(err) {
               console.log(err);
             });
             promise.then(function(rushees) {
-
+             // console.log(rushees);
+             let i = 0;
+             while (rushees[i] != null) {
+               page.people.push({email: rushees[i].email, hometown: rushees[i].hometown, userKey: rushees[i].userKey, major: rushees[i].major,
+               name: rushees[i].name, phone: rushees[i].phone, year: rushees[i].year, champion: rushees[i].champion, status: rushees[i].status,
+              description: rushees[i].description, notes: rushees[i].notes });
+         
+               i++;
+             }
+             page.activePeople = page.people;
             });
   }
 
+  public filterData(str) : any {
+    this.searchString += str.data;
+    if (str.data == null) {
+      this.searchString = this.searchString.substring(0, this.searchString.length - 1)
+    } 
+    if (this.searchString.length == 0) {
+      this.activePeople = this.people;
+    } else {
+      this.activePeople = [];
+      for (var i = 0; i < this.people.length; i++) {
+        if (this.people[i].name.toLowerCase().indexOf(this.searchString) >= 0) {
+          this.activePeople.push(this.people[i]);
+        } 
+      }
+    }
+
+    
+
+   // this.people = this.activePeople;
+  }
 
 }

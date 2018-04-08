@@ -2,12 +2,17 @@ page-dashboard {
     .cards {
         height: auto;
         //justify-content:flex-start !important; 
-        //padding-left: 100px;
-        padding-right: 150px;
+        padding-left: 0px;
+        //padding-right: 150px;
+        width:400px;
         text-align: left;
         font-weight: 500;
         text-transform: none;
 
+    }
+
+    .segment {
+        justify-content: left;
     }
 
     .smallData {
