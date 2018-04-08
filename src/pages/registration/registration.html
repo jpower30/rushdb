@@ -14,8 +14,10 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Org</ion-label>
-      <ion-input [formControl]="credentialsForm.controls['orginization']" type="text"></ion-input>
+      <ion-label floating>Orginization</ion-label>
+      <ion-select [formControl]="credentialsForm.controls['orginization']">
+        <ion-option *ngFor="let orginization of orginizations" value={{orginization.orgKey}}>{{orginization.name}}</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>

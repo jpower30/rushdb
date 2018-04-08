@@ -21,10 +21,13 @@ export class RegistrationPage {
   credentialsForm: FormGroup;
   failedRegistration : boolean;
   failedReason : string;
+  private orginizations = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
               public restProvider: RestProvider) {
     this.failedRegistration = false;
+
+    this.getOrgs();
 
     this.credentialsForm = this.formBuilder.group({
       name: [''],
@@ -59,5 +62,17 @@ export class RegistrationPage {
                 }
             });
         }
+    }
+
+    getOrgs() {
+        var page = this;
+        this.restProvider.getOrgs().then(function(orgs) {
+           let i = 0;
+           while (orgs[i] != null) {
+             page.orginizations.push(orgs[i]);
+             i++;
+           }
+           console.log(page.orginizations);
+        });
     }
 }

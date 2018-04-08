@@ -29,6 +29,7 @@ export class RusheeFormPage {
               private formBuilder: FormBuilder) {
 
     console.log(navParams.get('userToken'));
+    this.image = "";
 
     this.infoForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -60,18 +61,21 @@ export class RusheeFormPage {
   }
 
   takePicture(){
-      const options: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        saveToPhotoAlbum: false,
-        mediaType: this.camera.MediaType.PICTURE,
-        cameraDirection: this.camera.Direction.FRONT
-      }
+      if (!this.image) {
+        const options: CameraOptions = {
+          quality: 100,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          saveToPhotoAlbum: false,
+          mediaType: this.camera.MediaType.PICTURE,
+          cameraDirection: this.camera.Direction.FRONT
+        }
 
-      this.camera.getPicture(options).then((imageData) => {
-        this.image = 'data:image/jpeg;base64,' + imageData;
-      }, (err) => {
-        console.log(err);
-      });
+        this.camera.getPicture(options).then((imageData) => {
+          this.image = 'data:image/jpeg;base64,' + imageData;
+          console.log(this.image);
+        }, (err) => {
+          console.log(err);
+        });
+      }
   }
 }
