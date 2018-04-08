@@ -1,9 +1,9 @@
 page-dashboard {
     .cards {
         height: auto;
-        //justify-content:flex-start !important; 
+        //justify-content:flex-end !important; 
         padding-left: 0px;
-        //padding-right: 150px;
+        padding-right: 220px;
         width:400px;
         text-align: left;
         font-weight: 500;
@@ -16,8 +16,7 @@ page-dashboard {
     }
 
     .smallData {
-        font-size: 14px !important;
-        color: black !important;
+        font-size: 12px !important;
         list-style-type: none;
     }
 

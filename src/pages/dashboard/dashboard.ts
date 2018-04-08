@@ -101,10 +101,11 @@ export class DashboardPage {
   }
 
   public filterData(str) : any {
-    this.searchString += str.data;
     if (str.data == null) {
       this.searchString = this.searchString.substring(0, this.searchString.length - 1)
-    } 
+    } else {
+      this.searchString += str.data;
+    }
     if (this.searchString.length == 0) {
       this.activePeople = this.people;
     } else {
