@@ -50,19 +50,29 @@ export class RusheeFormPage {
                 hometown: this.infoForm.controls['hometown'].value,
                 major: this.infoForm.controls['major'].value,
                 year: this.infoForm.controls['year'].value,
-                picture: this.image,
                 status: "Rushing",
                 notes: "",
                 description: "",
                 champion: "",
                 visited: [],
+                hasPicture: false,
                 userToken: this.navParams.get('userToken')
             }
             var promise = this.restProvider.submitRushee(body).catch(function(err) {
               console.log(err);
             });
             promise.then(data => {
-                console.log(data);
+                if (this.image) {
+                  var body = {
+                    userKey: data['userKey'],
+                    userToken: this.navParams.get('userToken'),
+                    picture: this.image
+                  }
+                  console.log(body);
+                  this.restProvider.submitPicture(body).catch(function(err) {
+                    console.log(err);
+                  });
+                }
             });
             this.navCtrl.push(ThanksPage, this.navParams);
         }
@@ -82,7 +92,7 @@ export class RusheeFormPage {
           console.log(err);
         });
         promise.then((imageData) => {
-          this.image = 'data:image/jpeg;base64,' + imageData;
+          this.image = imageData;
           console.log(this.image);
         }, (err) => {
           console.log(err);

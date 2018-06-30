@@ -51,7 +51,8 @@ export class DashboardPage {
       notes: person.notes,
       userKey: person.userKey,
       userToken: this.navParams.get('userToken'),
-      visited: person.visited
+      visited: person.visited,
+      hasPicture: person.hasPicture
     };
     console.log(body);
     this.navCtrl.push(RusheeInfoPage, body);
@@ -100,7 +101,8 @@ export class DashboardPage {
               status: rushees[i].status,
               description: rushees[i].description,
               notes: rushees[i].notes,
-              visited: rushees[i].visited
+              visited: rushees[i].visited,
+              hasPicture: rushees[i].hasPicture
             }
           );
 

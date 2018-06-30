@@ -29,7 +29,7 @@ export class RusheeInfoPage {
   description: string;
   notes: string;
   daysVisited: string;
-  hasPic: boolean;
+  hasPicture: boolean;
   private brothers = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider,
@@ -47,6 +47,7 @@ export class RusheeInfoPage {
     this.status = navParams.get('status');
     this.description = navParams.get('description');
     this.notes = navParams.get('notes');
+    this.hasPicture = navParams.get('hasPicture');
 
     let visited = navParams.get('visited');
     if (visited != undefined) {
@@ -62,7 +63,7 @@ export class RusheeInfoPage {
       this.daysVisited = days.join(", ");
     }
 
-    this.hasPic = true;
+
 
     this.rusheeInfo = this.formBuilder.group({
       name: [this.name],
@@ -128,13 +129,13 @@ export class RusheeInfoPage {
        userToken: this.navParams.get('userToken'),
        userKey: this.navParams.get('userKey')
      }
-     var promise = this.restProvider.getPic(body).catch(function(err) {
+     var promise = this.restProvider.getPicture(body).catch(function(err) {
        console.log(err);
      });
      var name = this.name;
      var modalCtrl = this.modalCtrl;
-     promise.then(function(image) {
-       let imageModal = modalCtrl.create(RusheeImage, { image: image, name: name });
+     promise.then(function(resp) {
+       let imageModal = modalCtrl.create(RusheeImage, { image: resp['picture'], name: name });
        imageModal.present();
      });
   }
@@ -160,7 +161,7 @@ export class RusheeImage {
  name: string;
 
  constructor(public navCtrl: NavController, params: NavParams) {
-   this.image = params.get('image');
+   this.image = "data:image/jpeg;base64," + params.get('image');
    this.name = params.get('name');
  }
  goBack() {

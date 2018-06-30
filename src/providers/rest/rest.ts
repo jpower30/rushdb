@@ -101,9 +101,20 @@ export class RestProvider {
     });
   }
 
-  getPic(data) {
+  getPicture(data) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl + '/get-pic', JSON.stringify(data), {headers: this.myheader})
+      this.http.post(this.apiUrl + '/get-picture', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  submitPicture(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/add-picture', JSON.stringify(data), {headers: this.myheader})
         .subscribe(res => {
           resolve(res);
         }, (err) => {
