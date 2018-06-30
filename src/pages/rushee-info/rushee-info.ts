@@ -28,6 +28,8 @@ export class RusheeInfoPage {
   status: string;
   description: string;
   notes: string;
+  daysVisited: string;
+  hasPic: boolean;
   private brothers = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider,
@@ -45,6 +47,22 @@ export class RusheeInfoPage {
     this.status = navParams.get('status');
     this.description = navParams.get('description');
     this.notes = navParams.get('notes');
+
+    let visited = navParams.get('visited');
+    if (visited != undefined) {
+      let dayString = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      let days = [];
+      for (var i = 0; i < visited.length; i++) {
+        var date = new Date(visited[i] + " UTC");
+        var day = dayString[date.getDay()];
+        if (days.indexOf(day) < 0) {
+          days.push(day);
+        }
+      }
+      this.daysVisited = days.join(", ");
+    }
+
+    this.hasPic = true;
 
     this.rusheeInfo = this.formBuilder.group({
       name: [this.name],
@@ -141,8 +159,11 @@ export class RusheeImage {
  image: string;
  name: string;
 
- constructor(params: NavParams) {
+ constructor(public navCtrl: NavController, params: NavParams) {
    this.image = params.get('image');
    this.name = params.get('name');
+ }
+ goBack() {
+   this.navCtrl.pop();
  }
 }

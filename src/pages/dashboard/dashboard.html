@@ -5,17 +5,14 @@
   Ionic pages and navigation.
 -->
 
-  <ion-header>
+  <ion-content>
 
-    <ion-navbar>
-     <!-- <ion-title>Dashboard</ion-title> -->
-
+    <ion-navbar hideBackButton>
         <ion-segment class="segment">
-            <button ion-button color="pledged" (click)="addRushee()">Add Profile</button>
+            <button ion-button color="pledged" (click)="addRushee()">Add</button>
             <button ion-button color="receivedBid" (click)="logOut()">Log Out</button>
             <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="filterData($event)"></ion-searchbar>
         </ion-segment>
-
     </ion-navbar>
 
     <ion-grid class="grid">
@@ -43,9 +40,8 @@
     </ion-grid>
 
 
-  </ion-header>
-
-
-  <ion-content padding>
   </ion-content>
+
+
+
 

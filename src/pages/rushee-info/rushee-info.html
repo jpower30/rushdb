@@ -8,7 +8,8 @@
 
   <ion-navbar>
     <ion-title>Details: {{name}}</ion-title>
-    <button ion-button color="pledged" (click)="viewPic()">View Pic</button>
+    <ion-title>Visited on {{daysVisited}}</ion-title>
+    <button ion-button [disabled]="!this.hasPic" color="pledged" (click)="viewPic()">View Pic</button>
     <button ion-button color="receivedBid" (click)="markVisited()">Mark Visited</button>
   </ion-navbar>
 
@@ -57,7 +58,13 @@
 
     <ion-item>
       <ion-label floating>Status</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['status']" type="text"></ion-input>
+      <ion-select [formControl]="rusheeInfo.controls['status']">
+        <ion-option value="Rushing">Rushing</ion-option>
+        <ion-option value="Bid Eligible">Bid Eligible</ion-option>
+        <ion-option value="Received Bid">Received Bid</ion-option>
+        <ion-option value="Pledged">Pledged</ion-option>
+        <ion-option value="Dumpster">Dumpster</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
@@ -77,5 +84,6 @@
         </button>
       </ion-col>
     </ion-row>
+
   </form>
 </ion-content>

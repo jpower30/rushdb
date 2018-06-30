@@ -50,7 +50,8 @@ export class DashboardPage {
       description: person.description,
       notes: person.notes,
       userKey: person.userKey,
-      userToken: this.navParams.get('userToken')
+      userToken: this.navParams.get('userToken'),
+      visited: person.visited
     };
     console.log(body);
     this.navCtrl.push(RusheeInfoPage, body);
@@ -59,8 +60,8 @@ export class DashboardPage {
   public setColor(person) : string  {
       if (person.status == "Rushing") {
         return "primary";
-      }  else if (person.status == "Bid Eligable") {
-        return "bidEligable";
+      }  else if (person.status == "Bid Eligible") {
+        return "bidEligible";
       }  else if (person.status == "Received Bid") {
         return "receivedBid";
       } else if (person.status == "Pledged") {
@@ -81,20 +82,32 @@ export class DashboardPage {
       }
       var page = this;  //used to access this
       var promise = this.restProvider.getRushees(body).catch(function(err) {
-              console.log(err);
-            });
-            promise.then(function(rushees) {
-             // console.log(rushees);
-             let i = 0;
-             while (rushees[i] != null) {
-               page.people.push({email: rushees[i].email, hometown: rushees[i].hometown, userKey: rushees[i].userKey, major: rushees[i].major,
-               name: rushees[i].name, phone: rushees[i].phone, year: rushees[i].year, champion: rushees[i].champion, status: rushees[i].status,
-              description: rushees[i].description, notes: rushees[i].notes });
+        console.log(err);
+      });
+      promise.then(function(rushees) {
+        let i = 0;
+        while (rushees[i] != null) {
+          page.people.push(
+            {
+              email: rushees[i].email,
+              hometown: rushees[i].hometown,
+              userKey: rushees[i].userKey,
+              major: rushees[i].major,
+              name: rushees[i].name,
+              phone: rushees[i].phone,
+              year: rushees[i].year,
+              champion: rushees[i].champion,
+              status: rushees[i].status,
+              description: rushees[i].description,
+              notes: rushees[i].notes,
+              visited: rushees[i].visited
+            }
+          );
 
-               i++;
-             }
-             page.activePeople = page.people;
-            });
+          i++;
+        }
+        page.activePeople = page.people;
+      });
   }
 
   public filterData(str) : any {

@@ -55,6 +55,7 @@ export class RusheeFormPage {
                 notes: "",
                 description: "",
                 champion: "",
+                visited: [],
                 userToken: this.navParams.get('userToken')
             }
             var promise = this.restProvider.submitRushee(body).catch(function(err) {
