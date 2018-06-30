@@ -11,7 +11,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RusheeFormPage } from '../pages/rushee-form/rushee-form'
 import { ThanksPage } from '../pages/thanks/thanks'
-import { RusheeInfoPage } from '../pages/rushee-info/rushee-info'
+import { RusheeInfoPage, RusheeImage } from '../pages/rushee-info/rushee-info'
 import { DashboardPage} from '../pages/dashboard/dashboard'
 import { RegistrationPage } from '../pages/registration/registration'
 
@@ -23,7 +23,8 @@ import { RegistrationPage } from '../pages/registration/registration'
     ThanksPage,
     RusheeInfoPage,
     DashboardPage,
-    RegistrationPage
+    RegistrationPage,
+    RusheeImage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +40,8 @@ import { RegistrationPage } from '../pages/registration/registration'
     ThanksPage,
     RusheeInfoPage,
     DashboardPage,
-    RegistrationPage
+    RegistrationPage,
+    RusheeImage
   ],
   providers: [
     StatusBar,

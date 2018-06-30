@@ -32,9 +32,6 @@ export class HomePage {
             var email = this.credentialsForm.controls['email'].value;
             var password = this.credentialsForm.controls['password'].value;
 
-            console.log('Email: ' + email);
-            console.log('Password: ' + password);
-
             var page = this;
             var body = {
               email: email,

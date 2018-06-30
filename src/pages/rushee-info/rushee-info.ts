@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RestProvider } from '../../providers/rest/rest';
 import { DashboardPage } from '../dashboard/dashboard';
@@ -31,7 +31,7 @@ export class RusheeInfoPage {
   private brothers = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder, public modalCtrl: ModalController) {
 
     this.getBrothers();
 
@@ -104,4 +104,45 @@ export class RusheeInfoPage {
     });
 
   }
+
+  viewPic() {
+     var body = {
+       userToken: this.navParams.get('userToken'),
+       userKey: this.navParams.get('userKey')
+     }
+     var promise = this.restProvider.getPic(body).catch(function(err) {
+       console.log(err);
+     });
+     var name = this.name;
+     var modalCtrl = this.modalCtrl;
+     promise.then(function(image) {
+       let imageModal = modalCtrl.create(RusheeImage, { image: image, name: name });
+       imageModal.present();
+     });
+  }
+
+  markVisited() {
+    var body = {
+      userToken: this.navParams.get('userToken'),
+      userKey: this.navParams.get('userKey')
+    }
+    this.restProvider.markVisited(body).catch(function(err) {
+      console.log(err);
+    });
+  }
+}
+
+@Component({
+  selector: 'page-rushee-image',
+  templateUrl: 'rushee-image.html',
+})
+export class RusheeImage {
+
+ image: string;
+ name: string;
+
+ constructor(params: NavParams) {
+   this.image = params.get('image');
+   this.name = params.get('name');
+ }
 }
