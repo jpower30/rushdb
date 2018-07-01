@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 export class RestProvider {
 
   myheader: HttpHeaders;
-  apiUrl = 'https://rushdb.herokuapp.com';
+  apiUrl = 'https://rushdb-backend.herokuapp.com';
 
   constructor(public http: HttpClient) {
     console.log('Hello RestProvider Provider');

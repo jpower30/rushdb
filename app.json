@@ -1,0 +1,7 @@
+{
+    "name": "RushDB",
+    "description": "Keep track of people during rush",
+    "repository": "https://github.com/jpower30/rushdb",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/9/96/Greek_letter_uppercase_Phi.svg",
+    "keywords": ["ionic3", "heroku", "rush"]
+}
