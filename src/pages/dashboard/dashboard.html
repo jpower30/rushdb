@@ -14,6 +14,18 @@
           <ion-searchbar (ionInput)="filterData($event)"></ion-searchbar>
       </ion-segment>
 
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-select [(ngModel)]="currentStatus" #status (ionChange)="filterStatus()">
+          <ion-option value="default">All</ion-option>
+          <ion-option value="Rushing">Rushing</ion-option>
+          <ion-option value="Bid Eligible">Bid Eligible</ion-option>
+          <ion-option value="Received Bid">Received Bid</ion-option>
+          <ion-option value="Pledged">Pledged</ion-option>
+          <ion-option value="Dumpster">Dumpster</ion-option>
+        </ion-select>
+      </ion-item>
+
   </ion-navbar>
   <ion-grid class="grid">
     <ion-row>

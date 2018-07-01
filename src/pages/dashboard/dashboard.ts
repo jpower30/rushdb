@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { RusheeFormPage } from '../rushee-form/rushee-form';
 import { RestProvider } from '../../providers/rest/rest';
 import { RusheeInfoPage } from '../rushee-info/rushee-info';
+import { StatusBar } from '@ionic-native/status-bar';
 
 /**
  * Generated class for the DashboardPage page.
@@ -21,6 +22,11 @@ export class DashboardPage {
   private activePeople = [];
 
   private searchString = "";
+
+  private currentStatus = "default";
+
+
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public nav: NavController, public restProvider: RestProvider) {
@@ -58,8 +64,8 @@ export class DashboardPage {
   public setColor(person) : string  {
       if (person.status == "Rushing") {
         return "primary";
-      }  else if (person.status == "Bid Eligable") {
-        return "bidEligable";
+      }  else if (person.status == "Bid Eligible") {
+        return "bidEligible";
       }  else if (person.status == "Received Bid") {
         return "receivedBid";
       } else if (person.status == "Pledged") {
@@ -103,19 +109,62 @@ export class DashboardPage {
       this.searchString += str.data;
     }
     if (this.searchString.length == 0) {
-      this.activePeople = this.people;
+       this.activePeople = this.people;
     } else {
       this.activePeople = [];
+
       for (var i = 0; i < this.people.length; i++) {
-        if (this.people[i].name.toLowerCase().indexOf(this.searchString) >= 0) {
-          this.activePeople.push(this.people[i]);
+        if (this.people[i].name.toLowerCase().indexOf(this.searchString) >= 0) {  
+            this.activePeople.push(this.people[i]);
         }
       }
     }
-
-
-
-   // this.people = this.activePeople;
   }
+
+  
+  public filterStatus() : void {
+
+    if (this.currentStatus != "default") {
+      this.activePeople = [];
+      for (var i = 0; i < this.people.length; i++) {
+        if (this.people[i].status == this.currentStatus) {
+          this.activePeople.push(this.people[i]);
+        }
+      }
+    } else {
+      this.activePeople = this.people;
+    }
+  }
+
+
+
+  // public addStatusFilter() : void {
+    
+  //   if (this.currentStatus != "default") {
+  //     let tempArray = [];
+  //     for (var i = 0; i < this.activePeople.length; i++) {
+  //       if (this.activePeople[i].status == this.currentStatus) {
+  //           tempArray.push(this.activePeople[i]);
+  //       }
+  //     }
+  //     this.activePeople = tempArray;
+  //   } 
+  // }
+
+  // public updateDisplay() {  //find max length. loop through, only add if found in both activepeople1 and 2
+  //   console.log("updateDisplay");
+  //   console.log(this.activePeopleFromFilter);
+  //   console.log(this.activePeopleFromSearch);
+  //     for (let i = 0; i < this.activePeopleFromSearch.length; i++) {
+  //       for (let j = 0; j < this.activePeopleFromFilter.length; j++) {
+  //         if (this.activePeopleFromSearch[i] == this.activePeopleFromFilter[j]) {
+  //           this.activePeople.push(this.activePeopleFromSearch[i]);
+  //           j += 9999;
+  //         }
+  //       }
+  //     }
+    
+  // }
+
 
 }
