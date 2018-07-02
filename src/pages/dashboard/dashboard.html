@@ -14,7 +14,7 @@
           <ion-searchbar (ionInput)="filterData($event)"></ion-searchbar>
       </ion-segment>
 
-      <ion-item>
+      <ion-item no-lines class="statusFilter">
         <ion-label>Status</ion-label>
         <ion-select [(ngModel)]="currentStatus" #status (ionChange)="filterStatus()">
           <ion-option value="default">All</ion-option>

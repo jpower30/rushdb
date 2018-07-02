@@ -19,11 +19,15 @@ export class DashboardPage {
 
   private people = [];
 
-  private activePeople = [];
+  private searchPeople = [];
+
+  private filteredPeople = [];
 
   private searchString = "";
 
   private currentStatus = "default";
+
+  private activePeople = [];
 
 
 
@@ -98,10 +102,12 @@ export class DashboardPage {
 
                i++;
              }
+             page.searchPeople = page.people;
+             page.filteredPeople = page.people;
              page.activePeople = page.people;
             });
   }
-
+  //Filter by search box
   public filterData(str) : any {
     if (str.data == null) {
       this.searchString = this.searchString.substring(0, this.searchString.length - 1)
@@ -109,62 +115,50 @@ export class DashboardPage {
       this.searchString += str.data;
     }
     if (this.searchString.length == 0) {
-       this.activePeople = this.people;
+       this.searchPeople = this.people;
     } else {
-      this.activePeople = [];
+      this.searchPeople = [];
 
       for (var i = 0; i < this.people.length; i++) {
         if (this.people[i].name.toLowerCase().indexOf(this.searchString) >= 0) {  
-            this.activePeople.push(this.people[i]);
+            this.searchPeople.push(this.people[i]);
         }
       }
     }
+
+    this.updateDisplay();
   }
 
-  
+  //Filter by status
   public filterStatus() : void {
 
     if (this.currentStatus != "default") {
-      this.activePeople = [];
+      this.filteredPeople = [];
       for (var i = 0; i < this.people.length; i++) {
         if (this.people[i].status == this.currentStatus) {
-          this.activePeople.push(this.people[i]);
+          this.filteredPeople.push(this.people[i]);
         }
       }
     } else {
-      this.activePeople = this.people;
+      this.filteredPeople = this.people;
     }
+    this.updateDisplay();
   }
 
 
+  //Only display results found in both the search bar and filter status
+  public updateDisplay() { 
+      this.activePeople = [];
 
-  // public addStatusFilter() : void {
-    
-  //   if (this.currentStatus != "default") {
-  //     let tempArray = [];
-  //     for (var i = 0; i < this.activePeople.length; i++) {
-  //       if (this.activePeople[i].status == this.currentStatus) {
-  //           tempArray.push(this.activePeople[i]);
-  //       }
-  //     }
-  //     this.activePeople = tempArray;
-  //   } 
-  // }
-
-  // public updateDisplay() {  //find max length. loop through, only add if found in both activepeople1 and 2
-  //   console.log("updateDisplay");
-  //   console.log(this.activePeopleFromFilter);
-  //   console.log(this.activePeopleFromSearch);
-  //     for (let i = 0; i < this.activePeopleFromSearch.length; i++) {
-  //       for (let j = 0; j < this.activePeopleFromFilter.length; j++) {
-  //         if (this.activePeopleFromSearch[i] == this.activePeopleFromFilter[j]) {
-  //           this.activePeople.push(this.activePeopleFromSearch[i]);
-  //           j += 9999;
-  //         }
-  //       }
-  //     }
-    
-  // }
+      for (let i = 0; i < this.searchPeople.length; i++) {
+        for (let j = 0; j < this.filteredPeople.length; j++) {
+          if (this.searchPeople[i] == this.filteredPeople[j]) {
+            this.activePeople.push(this.searchPeople[i]);
+            j += this.filteredPeople.length;
+          }
+        }
+      }
+  }
 
 
 }
