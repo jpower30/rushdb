@@ -11,8 +11,19 @@
         <ion-segment class="segment">
             <button ion-button color="pledged" (click)="addRushee()">Add</button>
             <button ion-button color="receivedBid" (click)="logOut()">Log Out</button>
-            <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="filterData($event)"></ion-searchbar>
+            <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="updateDisplay()"></ion-searchbar>
         </ion-segment>
+        <ion-item no-lines class="statusFilter">
+            <ion-label>Status</ion-label>
+            <ion-select [(ngModel)]="currentStatus" #status (ionChange)="updateDisplay()">
+              <ion-option value="">All</ion-option>
+              <ion-option value="Rushing">Rushing</ion-option>
+              <ion-option value="Bid Eligible">Bid Eligible</ion-option>
+              <ion-option value="Received Bid">Received Bid</ion-option>
+              <ion-option value="Pledged">Pledged</ion-option>
+              <ion-option value="Dumpster">Dumpster</ion-option>
+            </ion-select>
+      </ion-item>
     </ion-navbar>
 
     <ion-grid class="grid">

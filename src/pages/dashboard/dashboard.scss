@@ -1,7 +1,7 @@
 page-dashboard {
     .cards {
         height: auto;
-        //justify-content:flex-end !important; 
+        //justify-content:flex-end !important;
         padding-left: 0px;
         padding-right: 220px;
         width:400px;
@@ -24,4 +24,8 @@ page-dashboard {
         padding: 0;
     }
 
+    .statusFilter {
+        width: 307px;
+        border: 5px !important; //not showing
+    }
 }
