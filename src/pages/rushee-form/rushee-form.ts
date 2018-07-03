@@ -28,7 +28,6 @@ export class RusheeFormPage {
               public camera: Camera,
               private formBuilder: FormBuilder) {
 
-    console.log(navParams.get('userToken'));
     this.image = "";
 
     this.infoForm = this.formBuilder.group({
