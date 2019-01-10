@@ -23,6 +23,7 @@ export class DashboardPage {
     private searchQuery : string;
     private currentStatus : string;
     private currentDate : number;
+    private today : boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public nav: NavController, public restProvider: RestProvider) {
         this.getData();
@@ -101,7 +102,7 @@ export class DashboardPage {
 
             let dayStr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             var dates = [];
-            for (var i = 0; i < page.people.length; i++) {
+            for (i = 0; i < page.people.length; i++) {
                 for (var j = 0; j < page.people[i].visited.length; j++) {
                     dates.push(new Date(page.people[i].visited[j] + " UTC"));
                 }
@@ -110,14 +111,19 @@ export class DashboardPage {
                 return a.getTime() - b.getTime();
             });
             var days = [];
-            for (var i = 0; i < dates.length; i++) {
-                var day = dayStr[dates[i].getDay()];
-                if (days.indexOf(dates[i].getDay()) < 0) {
-                    page.dateList.push({value: dates[i].getDay(), text: day});
-                    days.push(dates[i].getDay());
+            for (var k = 0; k < dates.length; k++) {
+                var day = dayStr[dates[k].getDay()];
+                if (days.indexOf(dates[k].getDay()) < 0) {
+                    page.dateList.push({value: dates[k].getDay(), text: day});
+                    days.push(dates[k].getDay());
                 }
             }
         });
+    }
+
+    public updateDate() {
+        this.today = false;
+        this.updateDisplay();
     }
 
     public updateDisplay() {
@@ -136,11 +142,15 @@ export class DashboardPage {
     }
 
     public dateMatch(person) : boolean {
-        if (this.currentDate == -1) {
+        if (!this.today && this.currentDate == -1) {
             return true;
         }
+        let date = new Date().getDay();
+        if (!this.today) {
+            date = this.currentDate;
+        }
         for (var i = 0; i < person.visited.length; i++) {
-            if (new Date(person.visited[i] + " UTC").getDay() == this.currentDate) {
+            if (new Date(person.visited[i] + " UTC").getDay() == date) {
                 return true;
             }
         }

@@ -15,14 +15,18 @@
         </ion-segment>
 
         <ion-row>
-          <ion-item class="statusFilter">
+          <ion-item class="filter">
+            <ion-label>Today</ion-label>
+            <ion-toggle [(ngModel)]="today" (ionChange)="updateDisplay()" [checked]=today></ion-toggle>
+          </ion-item>
+          <ion-item class="filter">
             <ion-label>Date</ion-label>
-            <ion-select id="dateSelect" [(ngModel)]="currentDate" #status (ionChange)="updateDisplay()">
-                <ion-option value="-1">All</ion-option>
+            <ion-select id="dateSelect" [(ngModel)]="currentDate" #status (ionChange)="updateDate()">
+                <ion-option value="-1" [selected]=today>All</ion-option>
                 <ion-option *ngFor="let item of dateList" value="{{item.value}}">{{item.text}}</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item class="statusFilter">
+          <ion-item class="filter">
               <ion-label>Status</ion-label>
               <ion-select [(ngModel)]="currentStatus" #status (ionChange)="updateDisplay()">
                 <ion-option value="">All</ion-option>

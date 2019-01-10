@@ -28,9 +28,11 @@ export class RusheeInfoPage {
   status: string;
   description: string;
   notes: string;
+  notesAdd : string;
   daysVisited: string;
   hasPicture: boolean;
   private brothers = [];
+  private comments = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public restProvider: RestProvider,
               private formBuilder: FormBuilder, public modalCtrl: ModalController) {
@@ -48,6 +50,7 @@ export class RusheeInfoPage {
     this.description = navParams.get('description');
     this.notes = navParams.get('notes');
     this.hasPicture = navParams.get('hasPicture');
+    this.notesAdd = "";
 
     let visited = navParams.get('visited');
     if (visited != undefined) {
@@ -63,8 +66,6 @@ export class RusheeInfoPage {
       this.daysVisited = days.join(", ");
     }
 
-
-
     this.rusheeInfo = this.formBuilder.group({
       name: [this.name],
       email: [this.email],
@@ -77,6 +78,10 @@ export class RusheeInfoPage {
       description: [this.description],
       notes: [this.notes]
     });
+
+    this.comments = this.notes.split("\n");
+    this.comments.reverse();
+    console.log(this.comments);
   }
 
   onSave() {
