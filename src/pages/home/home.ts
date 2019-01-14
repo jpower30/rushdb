@@ -43,8 +43,18 @@ export class HomePage {
             promise.then(function(user) {
                 console.log(user);
                 if (user['userToken']) {
-                    console.log(user['userToken']);
-                    page.navCtrl.push(DashboardPage, {userToken: user['userToken']});
+                    var promise2 = page.restProvider.getUserInfo(user['userToken']).catch(function(err) {
+                        console.log(err);
+                    });
+                    promise2.then(function(info) {
+                        const params = {
+                            userToken: user['userToken'],
+                            userName: info['name'],
+                            userId: info['userId']
+                        }
+                        console.log(params);
+                        page.navCtrl.push(DashboardPage, params);
+                    });
                 } else {
                   page.failedLogIn = true;
                 }

@@ -19,18 +19,19 @@ export class DashboardPage {
 
     private people = [];
     private activePeople = [];
-    private dateList  = [];
+    private dateList = [];
+    private currentDate = -1;
+    private currentStatus = "";
     private searchQuery : string;
-    private currentStatus : string;
-    private currentDate : number;
     private today : boolean;
+    private championFilter : boolean;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public nav: NavController, public restProvider: RestProvider) {
         this.getData();
     }
 
     public getInfo(person) : void {
-        var body = {
+        let params = {
             name: person.name,
             email: person.email,
             phone: person.phone,
@@ -42,18 +43,21 @@ export class DashboardPage {
             description: person.description,
             notes: person.notes,
             userKey: person.userKey,
-            userToken: this.navParams.get('userToken'),
             visited: person.visited,
-            hasPicture: person.hasPicture
+            hasPicture: person.hasPicture,
+            userToken: this.navParams.get('userToken'),
+            userName: this.navParams.get('userName'),
+            userId: this.navParams.get('userId')
         };
-        console.log(body);
-        this.navCtrl.push(RusheeInfoPage, body);
+        this.navCtrl.push(RusheeInfoPage, params);
     }
 
     public setColor(person) : string  {
         if (person.status == "Rushing") {
             return "primary";
-        }  else if (person.status == "Bid Eligible") {
+        }  else if (person.status == "Interested") {
+            return "interested";
+        } else if (person.status == "Bid Eligible") {
             return "bidEligible";
         }  else if (person.status == "Received Bid") {
             return "receivedBid";
@@ -118,6 +122,7 @@ export class DashboardPage {
                     days.push(dates[k].getDay());
                 }
             }
+            console.log(page.people);
         });
     }
 
@@ -130,15 +135,14 @@ export class DashboardPage {
         this.activePeople = [];
         for (var i = 0; i < this.people.length; i++) {
             var person = this.people[i];
-            if ((!this.searchQuery ||
-                 person.name.toLowerCase().indexOf(this.searchQuery.toLowerCase()) >= 0) &&
-                (!this.currentStatus ||
-                 person.status == this.currentStatus) && this.dateMatch(person)) {
+            if ((!this.searchQuery || person.name.toLowerCase().indexOf(this.searchQuery.toLowerCase()) >= 0) &&
+                (!this.currentStatus || person.status == this.currentStatus) &&
+                this.dateMatch(person) &&
+                (!this.championFilter || person.champion === this.navParams.get("userId"))) {
 
                 this.activePeople.push(this.people[i]);
             }
         }
-        console.log(this.currentDate);
     }
 
     public dateMatch(person) : boolean {

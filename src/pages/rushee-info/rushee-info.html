@@ -9,7 +9,6 @@
   <ion-navbar>
     <ion-title>Details: {{name}}</ion-title>
     <ion-title>Visited on {{daysVisited}}</ion-title>
-    <button ion-button [disabled]="!this.hasPicture" color="pledged" (click)="viewPic()">View Pic</button>
     <button ion-button color="receivedBid" (click)="markVisited()">Mark Visited</button>
   </ion-navbar>
 
@@ -17,73 +16,92 @@
 
 
 <ion-content padding>
-  <form [formGroup]="rusheeInfo">
-    <ion-item>
-      <ion-label floating>Name</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['name']" type="text"></ion-input>
-    </ion-item>
+    <form [formGroup]="rusheeInfo">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
 
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['email']" type="email"></ion-input>
-    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Name</ion-label>
+                        <ion-input [formControl]="rusheeInfo.controls['name']" type="text"></ion-input>
+                    </ion-item>
 
-    <ion-item>
-      <ion-label floating>Phone</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['phone']" type="tel"></ion-input>
-    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Email</ion-label>
+                        <ion-input [formControl]="rusheeInfo.controls['email']" type="email"></ion-input>
+                    </ion-item>
 
-    <ion-item>
-      <ion-label floating>Home Town</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['hometown']" type="text"></ion-input>
-    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Phone</ion-label>
+                        <ion-input [formControl]="rusheeInfo.controls['phone']" type="tel"></ion-input>
+                    </ion-item>
 
-    <ion-item>
-      <ion-label floating>Major</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['major']" type="text"></ion-input>
-    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Home Town</ion-label>
+                        <ion-input [formControl]="rusheeInfo.controls['hometown']" type="text"></ion-input>
+                    </ion-item>
 
+                    <ion-item>
+                        <ion-label floating>Major</ion-label>
+                        <ion-input [formControl]="rusheeInfo.controls['major']" type="text"></ion-input>
+                    </ion-item>
 
-    <ion-item>
-      <ion-label floating>Year</ion-label>
-      <ion-input [formControl]="rusheeInfo.controls['year']" type="number"></ion-input>
-    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Year</ion-label>
+                        <ion-input [formControl]="rusheeInfo.controls['year']" type="number"></ion-input>
+                    </ion-item>
 
-    <ion-item>
-      <ion-label floating>Champion</ion-label>
-      <ion-select [formControl]="rusheeInfo.controls['champion']">
-        <ion-option *ngFor="let brother of brothers" value={{brother.userId}}>{{brother.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Champion</ion-label>
+                        <ion-select [formControl]="rusheeInfo.controls['champion']">
+                        <ion-option *ngFor="let brother of brothers" value={{brother.userId}}>{{brother.name}}</ion-option>
+                        </ion-select>
+                    </ion-item>
 
-    <ion-item>
-      <ion-label floating>Status</ion-label>
-      <ion-select [formControl]="rusheeInfo.controls['status']">
-        <ion-option value="Rushing">Rushing</ion-option>
-        <ion-option value="Bid Eligible">Bid Eligible</ion-option>
-        <ion-option value="Received Bid">Received Bid</ion-option>
-        <ion-option value="Pledged">Pledged</ion-option>
-        <ion-option value="Dumpster">Dumpster</ion-option>
-      </ion-select>
-    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Status</ion-label>
+                        <ion-select [formControl]="rusheeInfo.controls['status']">
+                          <ion-option value="Rushing">Rushing</ion-option>
+                          <ion-option value="Interested">Interested</ion-option>
+                          <ion-option value="Bid Eligible">Bid Eligible</ion-option>
+                          <ion-option value="Received Bid">Received Bid</ion-option>
+                          <ion-option value="Pledged">Pledged</ion-option>
+                          <ion-option value="Dumpster">Dumpster</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
 
-    <ion-item>
-      <ion-label floating>Description</ion-label>
-      <ion-textarea [formControl]="rusheeInfo.controls['description']"></ion-textarea>
-    </ion-item>
+                <ion-col>
+                    <ion-item>
+                        <ion-label floating>Description</ion-label>
+                        <ion-textarea [formControl]="rusheeInfo.controls['description']"></ion-textarea>
+                    </ion-item>
 
-    <ion-item>
-      <ion-label floating>Notes</ion-label>
-      <ion-textarea [formControl]="rusheeInfo.controls['notes']"></ion-textarea>
-    </ion-item>
+                    <ion-card>
+                        <ion-card-header>
+                            Notes
+                        </ion-card-header>
+                        <ion-card-content>
+                            <ion-list>
+                                <p *ngFor="let comment of comments">{{comment}}</p>
+                            </ion-list>
+                        </ion-card-content>
+                    </ion-card>
 
-    <ion-row>
-      <ion-col text-center>
-        <button ion-button block [disabled]="!rusheeInfo.valid" (click)="onSave()">
-          Save
-        </button>
-      </ion-col>
-    </ion-row>
+                    <ion-item>
+                        <ion-label floating>Notes</ion-label>
+                        <ion-textarea [formControl]="rusheeInfo.controls['notes']"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col text-center>
+                    <button ion-button block [disabled]="!rusheeInfo.valid" (click)="onSave()">
+                        Save
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
   </form>
-
 </ion-content>

@@ -9,7 +9,6 @@ export class RestProvider {
   apiUrl = 'https://rushdb-backend.herokuapp.com';
 
   constructor(public http: HttpClient) {
-    console.log('Hello RestProvider Provider');
     this.myheader = new HttpHeaders().set('Content-Type', 'application/json; charset=UTF-8')
   }
 
@@ -115,6 +114,18 @@ export class RestProvider {
   submitPicture(data) {
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl + '/add-picture', JSON.stringify(data), {headers: this.myheader})
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  getUserInfo(userToken) {
+    const body = {userToken: userToken};
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + '/get-user-info', JSON.stringify(body), {headers: this.myheader})
         .subscribe(res => {
           resolve(res);
         }, (err) => {

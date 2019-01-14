@@ -20,6 +20,10 @@
             <ion-toggle [(ngModel)]="today" (ionChange)="updateDisplay()" [checked]=today></ion-toggle>
           </ion-item>
           <ion-item class="filter">
+            <ion-label>My Rushees</ion-label>
+            <ion-toggle [(ngModel)]="championFilter" (ionChange)="updateDisplay()" [checked]=championFilter></ion-toggle>
+          </ion-item>
+          <ion-item class="filter">
             <ion-label>Date</ion-label>
             <ion-select id="dateSelect" [(ngModel)]="currentDate" #status (ionChange)="updateDate()">
                 <ion-option value="-1" [selected]=today>All</ion-option>
@@ -31,6 +35,7 @@
               <ion-select [(ngModel)]="currentStatus" #status (ionChange)="updateDisplay()">
                 <ion-option value="">All</ion-option>
                 <ion-option value="Rushing">Rushing</ion-option>
+                <ion-option value="Interested">Interested</ion-option>
                 <ion-option value="Bid Eligible">Bid Eligible</ion-option>
                 <ion-option value="Received Bid">Received Bid</ion-option>
                 <ion-option value="Pledged">Pledged</ion-option>

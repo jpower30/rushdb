@@ -28,7 +28,6 @@ export class RusheeInfoPage {
   status: string;
   description: string;
   notes: string;
-  notesAdd : string;
   daysVisited: string;
   hasPicture: boolean;
   private brothers = [];
@@ -50,7 +49,6 @@ export class RusheeInfoPage {
     this.description = navParams.get('description');
     this.notes = navParams.get('notes');
     this.hasPicture = navParams.get('hasPicture');
-    this.notesAdd = "";
 
     let visited = navParams.get('visited');
     if (visited != undefined) {
@@ -76,16 +74,29 @@ export class RusheeInfoPage {
       champion: [this.champion],
       status: [this.status],
       description: [this.description],
-      notes: [this.notes]
+      notes: [""]
     });
 
-    this.comments = this.notes.split("\n");
+    this.comments = this.notes.split("~~~");
     this.comments.reverse();
-    console.log(this.comments);
+    if (this.comments[0] === "") {
+      this.comments = [];
+    }
+    console.log(navParams);
   }
 
   onSave() {
         if (this.rusheeInfo.valid) {
+            let newNotes = this.notes;
+            //If something has been added to notes
+            if (this.rusheeInfo.controls['notes'].value !== this.notes &&
+                this.rusheeInfo.controls['notes'].value !== "") {
+              //Add the seperator if the notes field already has something
+              if (this.notes !== "") {
+                newNotes += "~~~";
+              }
+              newNotes += this.rusheeInfo.controls['notes'].value + " -" + this.navParams.get('userName');
+            }
             var body = {
                 name: this.rusheeInfo.controls['name'].value,
                 email: this.rusheeInfo.controls['email'].value,
@@ -96,17 +107,18 @@ export class RusheeInfoPage {
                 champion: this.rusheeInfo.controls['champion'].value,
                 status: this.rusheeInfo.controls['status'].value,
                 description: this.rusheeInfo.controls['description'].value,
-                notes: this.rusheeInfo.controls['notes'].value,
+                notes: newNotes,
                 userKey: this.navParams.get('userKey'),
                 userToken: this.navParams.get('userToken')
             }
+            console.log(body);
             var promise = this.restProvider.editRushee(body).catch(function(err) {
               console.log(err);
             });
             promise.then(data => {
                 console.log(data);
+                this.navCtrl.push(DashboardPage, this.navParams);
             });
-            this.navCtrl.push(DashboardPage, this.navParams);
         }
   }
 
